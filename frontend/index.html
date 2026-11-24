@@ -1,0 +1,239 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <meta name="theme-color" content="#17324d">
+
+    <title>Business Lead Discovery</title>
+
+    <link rel="stylesheet" href="/style.css">
+
+    <link rel="stylesheet"
+          href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+</head>
+
+<body>
+
+<header>
+    <h1>Business Lead Discovery</h1>
+    <p>
+        Find nearby businesses, evaluate potential leads
+        and review supporting evidence.
+    </p>
+</header>
+
+<main>
+
+    <!-- SEARCH SECTION -->
+
+    <section class="panel">
+
+        <h2>Discover Business Leads</h2>
+
+        <form id="searchForm">
+
+            <div class="grid">
+
+                <label>
+                    Location
+                    <input
+                        id="location"
+                        type="text"
+                        placeholder="Vellore"
+                        required
+                        minlength="2">
+                </label>
+
+                <label>
+                    Product / Service
+                    <input
+                        id="service"
+                        type="text"
+                        placeholder="Website Development"
+                        required>
+                </label>
+
+                <label>
+                    Business Category
+                    <select id="category">
+                        <option value="">Any category</option>
+                        <option>Education</option>
+                        <option>Healthcare</option>
+                        <option>Retail</option>
+                        <option>Food</option>
+                        <option>Professional Services</option>
+                        <option>Automotive</option>
+                        <option>Hospitality</option>
+                    </select>
+                </label>
+
+                <label>
+                    Search Radius (km)
+                    <input
+                        id="radius"
+                        type="number"
+                        min="1"
+                        max="50"
+                        value="15">
+                </label>
+
+            </div>
+
+            <label>
+                Keywords
+                <input
+                    id="keywords"
+                    type="text"
+                    placeholder="Engineering College, School">
+            </label>
+
+            <button id="searchButton" type="submit">
+                Search Businesses
+            </button>
+
+        </form>
+
+        <p id="message" role="status"></p>
+
+    </section>
+
+
+    <!-- APPROVED CSV IMPORT -->
+
+    <section class="panel">
+
+        <h2>Import Approved CSV Dataset</h2>
+
+        <p class="muted-text">
+            Upload only datasets you have permission to reuse.
+            Required columns: <th>name</th>, <th>latitude</th>,
+            <th>longitude</th>. Optional: <th>category</th>,
+            <th>location</th>, <th>website</th>,
+            <th>source_url</th>.
+        </p>
+
+        <div class="import-row">
+
+            <input
+                id="csvFile"
+                type="file"
+                accept=".csv,text/csv"
+                aria-label="Approved CSV file">
+
+            <button
+                id="importButton"
+                class="secondary"
+                type="button">
+                Import CSV
+            </button>
+
+        </div>
+
+        <p id="importMessage" role="status"></p>
+
+    </section>
+
+
+    <!-- MAP AND RESULTS -->
+
+    <section class="panel">
+
+        <div class="toolbar">
+
+            <h2>
+                Business Lead Results
+                <span id="resultCount"></span>
+            </h2>
+
+            <div>
+
+                <button
+                    id="refreshButton"
+                    class="secondary"
+                    type="button">
+                    Refresh Leads
+                </button>
+
+                <button
+                    id="exportButton"
+                    class="secondary"
+                    type="button">
+                    Export Selected CSV
+                </button>
+
+            </div>
+
+        </div>
+
+        <div id="map"></div>
+
+        <div class="table-wrap">
+
+            <table>
+
+                <thead>
+                    <tr>
+                        <th>Select</th>
+                        <th>Business</th>
+                        <th>Category</th>
+                        <th>Distance</th>
+                        <th>Relevance Score</th>
+                        <th>Verification</th>
+                        <th>Evidence</th>
+                    </tr>
+                </thead>
+
+                <tbody id="resultsBody">
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </section>
+    <!-- BUSINESS DETAILS -->
+
+    <section class="panel">
+
+        <h2>Business Details and Evidence</h2>
+
+        <div id="leadDetails" class="muted">
+
+            Select a business name from the results table
+            to view its details.
+
+          
+
+        </div>
+
+    </section>
+
+    <!-- SEARCH HISTORY -->
+
+    <section class="panel">
+
+        <h2>Recent Search History</h2>
+
+        <ul id="historyList">
+            <li>No searches yet</li>
+        </ul>
+
+    </section>
+
+</main>
+
+
+<!-- JAVASCRIPT LIBRARIES -->
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js">
+</script>
+
+<script src="/app.js"></script>
+
+</body>
+</html>
