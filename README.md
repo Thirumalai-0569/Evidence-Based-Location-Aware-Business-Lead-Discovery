@@ -14,7 +14,7 @@ A starter implementation based on the supplied project brief and the uploaded pr
 ## Windows setup (Command Prompt)
 
 ```bat
-cd Business_Lead_Discovery_Future
+cd Evidence Based Location Aware Business Lead Discovery
 py -m venv .venv
 .venv\Scripts\activate
 python -m pip install --upgrade pip
